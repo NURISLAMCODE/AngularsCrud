@@ -1,0 +1,89 @@
+<div class="container container-fluid shadow">
+  <div class="row" style="background-color: rgb(158, 219, 238);">
+      <div class="col-md-5">
+        
+   
+        
+        <div class="shadow">
+          <h3 style="color: black; text-align: center">
+            Add Information
+          </h3>
+             <div style="text-align: center;">ID <input class="shadow" style="border-radius: 15rem;" type="text" class="form-control" placeholder="ID" name="id" id="id" [(ngModel)]="id" #id1="ngModel"></div>
+            
+             <div style="text-align: center;">Name</div>
+            <input style="border-radius: 15rem;" type="text" class="form-control" placeholder="name" name="Name" id="name" [(ngModel)]="name" #name1="ngModel" required maxlength="10" minlength="3">
+            
+            <div style="text-align: center;">Email</div>
+            <input style="border-radius: 15rem;" type="text" class="form-control" placeholder="Email" name="email" id="email" [(ngModel)]="email" #email1="ngModel" pattern="^[a-z0-9._]+@[a-z]+\.[a-z]{2,4}$">
+            <ul *ngIf="email1.dirty && email1.touched">
+              <li  *ngIf="email1.errors?.['pattern']">
+                 <span class="text-dark">eamil id must be contain @ </span>
+              </li>
+          </ul>
+          <div style="text-align: center;">Subject</div>
+            <input style="border-radius: 15rem;" type="text" class="form-control" placeholder="Subject" name="sub" id="sub" [(ngModel)]="sub" #sub1="ngModel">
+            <div style="text-align: center;">Marks</div>
+            <input style="border-radius: 15rem;" type="text" class="form-control" placeholder="Marks" name="marks" id="discount" [(ngModel)]="marks" #marks1="ngModel">
+           
+            
+           
+      <hr>
+            <div class="shadow" style="text-align: center; background-color: palegreen;padding-top: 20px;border-radius: 15rem;" >
+        <button style="" class="btn btn-success shadow"  (click)="addData()">Add Details</button>
+     
+        <hr>
+      </div>
+
+        </div>
+        
+      </div>
+
+      <div class="col-md-5">
+       <div>
+        <h5 style="align: center;">
+          <button type="button" class="btn btn-dark">
+            Total Student <span class="badge bg-warning">{{pdArray.length}}</span>
+          </button>
+          <div style="color: rgb(255, 255, 255);font-weight: bolder;">
+            {{message}}
+          {{errmessage}}
+          </div>
+          
+        </h5>
+       </div>
+          <table class="table">
+              <thead>
+                <tr>
+                  <!-- <th scope="col">SI</th> -->
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Marks</th>
+                  <th scope="col">Delete</th>
+                  <th scope="col">Edit</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr  *ngFor="let item of pdArray; let i = index" (click)="getp(item.id)" class="shadow" style="border-radius: 15rem;font-weight: bold;background-color: aliceblue;">
+                  
+                  <td>{{item.id}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.email}}</td>
+                  <td>{{item.sub}}</td>
+                  <td style="text-align: center;"
+                   ><div class="a1" [ngClass]="{'text-1':item.marks !<=80 && item.marks !>= 60,'text-danger':item.marks !<= 100 && item.marks !>= 60}">{{item.marks}}</div></td>
+                  <td>
+                    <button style="border-radius: 15rem;" class="btn btn-danger" (click)="deleteData(item.id)">DELETE</button>
+                  </td>
+                  <td>
+                    <button style="border-radius: 15rem;" class="btn btn-warning" (click)="updateData(id1.value,name1.value,email1.value,sub1.value,marks1.value)">UPADATE</button>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+      </div>
+  </div>
+</div>
